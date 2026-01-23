@@ -1,0 +1,10 @@
+# Arduino build artifacts
+*.o
+*.elf
+*.hex
+*.bin
+
+# IDE / OS junk
+.DS_Store
+.vscode/
+.idea/
