@@ -1,3 +1,4 @@
+#pragma once
 #include <EEPROM.h>
 
 struct LogEvent {

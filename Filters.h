@@ -1,18 +1,18 @@
-#ifndef FILTERS_H
-#define FILTERS_H
+#pragma once
+#include <Arduino.h>  
 
 class DCFilter {
 private:
-    int32_t w = 0; 
-    const int16_t alpha = 31130; // 0.95 in 16-bit fixed point
+    int32_t w = 0;
+    static constexpr int16_t alpha = 31130; // ~0.95 in Q15 fixed-point (31130/32768)
 
 public:
-    // Removes the 50,000+ DC offset from MAX30102
+    //removes DC offset 
     int16_t process(uint32_t raw) {
         int32_t prev_w = w;
-        // Fixed-point multiplication: (alpha * w) / 32768
-        w = (int32_t)raw + ((int32_t)((int16_t)alpha * w) >> 15);
+        //w = raw + alpha * w (fixed point)
+        w = (int32_t)raw + (((int32_t)alpha * w) >> 15);
+        //return raw - lowpass(raw) approx
         return (int16_t)(w - prev_w);
     }
 };
-#endif

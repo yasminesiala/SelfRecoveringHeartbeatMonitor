@@ -1,3 +1,5 @@
+#pragma once
+#include <Arduino.h>
 #ifndef RINGBUFFER_H
 #define RINGBUFFER_H
 
